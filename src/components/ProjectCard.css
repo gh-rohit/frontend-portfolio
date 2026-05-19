@@ -1,0 +1,193 @@
+/* src/components/ProjectCard.css */
+.project-card {
+  position: relative;
+  opacity: 0;
+  animation: scaleIn 0.6s ease forwards;
+  cursor: pointer;
+  border-radius: 24px;
+  transition: var(--transition);
+}
+
+.project-card.gradient-purple {
+  --card-gradient: var(--gradient-purple);
+}
+
+.project-card.gradient-cyan {
+  --card-gradient: var(--gradient-cyan);
+}
+
+.card-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  border-radius: 24px;
+  background: var(--bg-card);
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+}
+
+.card-image.loaded {
+  opacity: 1;
+}
+
+.image-skeleton {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    var(--bg-card) 0%, 
+    rgba(255,255,255,0.1) 50%, 
+    var(--bg-card) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton 1.5s ease infinite;
+}
+
+@keyframes skeleton {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.project-card.hovered .card-image {
+  transform: scale(1.1);
+}
+
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 32px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.project-card.hovered .card-overlay {
+  opacity: 1;
+}
+
+.overlay-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.4) 60%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.project-card.hovered .overlay-gradient {
+  opacity: 1;
+}
+
+.overlay-content {
+  position: relative;
+  z-index: 2;
+  transform: translateY(30px);
+  transition: transform 0.4s ease;
+}
+
+.project-card.hovered .overlay-content {
+  transform: translateY(0);
+}
+
+.project-type {
+  display: inline-block;
+  padding: 6px 14px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  color: white;
+}
+
+.card-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: white;
+  max-width: 90%;
+}
+
+.view-btn {
+  background: var(--card-gradient);
+  border: none;
+  padding: 10px 24px;
+  border-radius: 40px;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition);
+}
+
+.view-btn span {
+  transition: transform 0.3s ease;
+}
+
+.view-btn:hover {
+  transform: translateX(4px);
+}
+
+.view-btn:hover span {
+  transform: translateX(4px);
+}
+
+.card-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 24px;
+  background: var(--card-gradient);
+  opacity: 0;
+  filter: blur(20px);
+  transition: opacity 0.4s ease;
+  z-index: -1;
+}
+
+.project-card.hovered .card-glow {
+  opacity: 0.3;
+}
+
+@media (max-width: 768px) {
+  .card-overlay {
+    opacity: 1;
+  }
+  
+  .overlay-gradient {
+    opacity: 0.8;
+  }
+  
+  .overlay-content {
+    transform: translateY(0);
+  }
+  
+  .card-title {
+    font-size: 20px;
+  }
+}
